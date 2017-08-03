@@ -28,6 +28,6 @@ public class CustomButton extends AppCompatButton {
 
     private void styleButton() {
         setBackgroundColor(Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256)));
-        setLayoutParams(new ConstraintLayout.LayoutParams(ran.nextInt(100)+100, ran.nextInt(100)+100));
+        setLayoutParams(new ConstraintLayout.LayoutParams(200, 200));
     }
 }

@@ -133,7 +133,10 @@ public class MainActivity extends AppCompatActivity {
         button.setY(y);
         button.setX(ran.nextInt(700));
 
-        button.animate().translationYBy(screenHeight + button.getHeight() - y).rotation(1080).setDuration(5000);
+        button.animate()
+                .translationYBy(screenHeight + button.getHeight() - y)
+                .rotation(1080)
+                .setDuration(5000);
     }
 
     public void incScore() {
