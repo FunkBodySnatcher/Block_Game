@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Button button = (Button) v;
 
+                //Disable button, preventing player from clicking button twice in a row.
+                button.setEnabled(false);
+
                 //Stop button where it's pressed.
                 button.animate().cancel();
 
