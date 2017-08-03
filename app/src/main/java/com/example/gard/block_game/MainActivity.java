@@ -3,6 +3,7 @@ package com.example.gard.block_game;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -20,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Define text
     private TextView startText;
+
+    private TextView scoreTracker;
+
     private ConstraintLayout cl;
 
     private int screenWidth;
@@ -49,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Get text
         startText = (TextView) findViewById(R.id.startTextView);
+
+        scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
+
+        //Set scoretracker to invisible before pressing 'play'.
+        scoreTracker.setVisibility(View.INVISIBLE);
 
         onClickListener = new View.OnClickListener() {
             @Override
@@ -86,8 +95,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startGame(View view){
-
+        //Hide start text.
         startText.setVisibility(View.INVISIBLE);
+
+        //Show scoreTracker.
+        scoreTracker.setVisibility(View.VISIBLE);
+
+        //Set scoreTracker to front.
+        //TODO: Currently working for API >= 21. Fix for API 20 and <
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            scoreTracker.setElevation(2);
+        } else {
+            //?????? bringtofront fungerer ikke!!!
+        }
+
         newFall();
         newFall();
         newFall();
