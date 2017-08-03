@@ -87,26 +87,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void startGame(View view){
 
-        startText.setText("");
+        startText.setVisibility(View.INVISIBLE);
+        newFall();
         newFall();
         newFall();
     }
 
     public void newFall() {
+
         Button button = new Button(this);
         button.setBackgroundColor(Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256)));
         button.setOnClickListener(onClickListener);
         cl.addView(button);
 
-        //TODO: I forhold te screensize
-        int y = -(ran.nextInt(200)+50);
+        int y = -(ran.nextInt(screenHeight)+50);
         button.setY(y);
         //button.setText(String.valueOf(y));
         button.setX(ran.nextInt(700));
 
         button.animate().translationYBy(screenHeight + button.getHeight() - y).rotation(1080).setDuration(5000);
     }
-
-
 
 }
