@@ -1,7 +1,5 @@
 package com.example.gard.block_game;
 
-import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,7 +7,6 @@ import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -89,7 +86,20 @@ public class MainActivity extends AppCompatActivity {
                 }, 500);
 
                 //button.setVisibility(View.INVISIBLE);
-                newFall();
+
+                int nr = ran.nextInt(3);
+                switch (nr) {
+                    case 0: case 1:
+                        newFall();
+                        break;
+                    case 2:
+                        newFall();
+                        newFall();
+                        break;
+                    default:
+                        break;
+                }
+                incScore();
             }
         };
     }
@@ -115,18 +125,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newFall() {
-
-        Button button = new Button(this);
-        button.setBackgroundColor(Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256)));
+        CustomButton button = new CustomButton(this);
         button.setOnClickListener(onClickListener);
         cl.addView(button);
 
         int y = -(ran.nextInt(screenHeight)+50);
         button.setY(y);
-        //button.setText(String.valueOf(y));
         button.setX(ran.nextInt(700));
 
         button.animate().translationYBy(screenHeight + button.getHeight() - y).rotation(1080).setDuration(5000);
     }
 
+    public void incScore() {
+        int score = Integer.parseInt(scoreTracker.getText().toString());
+        score++;
+        scoreTracker.setText(String.valueOf(score));
+    }
 }
