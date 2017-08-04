@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView heart3;
     private ConstraintLayout cl;
     private View.OnClickListener onClickListener;
+    private TextView countdown;
 
     private int speed;
     private int hp;
     private int score;
     private int highscore;
     private Double chanceLimit;
+    private Handler handler = new Handler();
 
     //Ending stuff
     private TextView gameoverText;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         gameoverText = (TextView) findViewById(R.id.gameoverText);
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
+        countdown = (TextView) findViewById(R.id.countdownText);
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -64,8 +67,12 @@ public class MainActivity extends AppCompatActivity {
 
         cl.setBackgroundColor(Color.LTGRAY);
 
-        //countdown
-        startGame();
+        countdown();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                startGame();
+            }
+        }, 2400);
     }
 
     private void startGame(){
@@ -92,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
 //                Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
                 newFall();
-                Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         // Actions to do after 0.5 seconds
@@ -209,6 +215,49 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("highscore", highscore);
                 startActivity(intent);
 
+            }
+        });
+    }
+
+    private void countdown() {
+        countdown.setVisibility(View.VISIBLE);
+        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                countdown.setText(String.valueOf(2));
+                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                countdown.setText(String.valueOf(1));
+                                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                countdown.setVisibility(View.INVISIBLE);
+                                                            }
+                                                        });
+                                                    }
+                                                });
+
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
         });
     }
