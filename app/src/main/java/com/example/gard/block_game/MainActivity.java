@@ -116,13 +116,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         scoreTracker.setText(String.valueOf(score));
-
-        //Show scoreTracker and hearts.
-        scoreTracker.setVisibility(View.VISIBLE);
-        heart1.setVisibility(View.VISIBLE);
-        heart2.setVisibility(View.VISIBLE);
-        heart3.setVisibility(View.VISIBLE);
-
         newFall();
         newFall();
     }
@@ -159,13 +152,16 @@ public class MainActivity extends AppCompatActivity {
         hp--;
         switch (hp) {
             case 2:
-                heart3.setAlpha(0.1f);
+//                heart3.setAlpha(0.1f);
+                heart3.setImageResource(R.drawable.heartlost);
                 break;
             case 1:
-                heart2.setAlpha(0.1f);
+//                heart2.setAlpha(0.1f);
+                heart2.setImageResource(R.drawable.heartlost);
                 break;
             case 0:
-                heart1.setAlpha(0.1f);
+//                heart1.setAlpha(0.1f);
+                heart1.setImageResource(R.drawable.heartlost);
                 setEnding();
                 break;
             default:
