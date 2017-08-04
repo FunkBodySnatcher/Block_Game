@@ -1,18 +1,15 @@
 package com.example.gard.block_game;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout cl;
     private View.OnClickListener onClickListener;
 
-    private ArrayList<CustomButton> buttons;
     private int speed;
     private int hp;
     private int score;
@@ -38,10 +34,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView mainMenuText;
     private TextView tryAgainText;
 
+    TextView testText; //REMOVE
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        testText = (TextView) findViewById(R.id.testText); //REMOVE
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
         startText = (TextView) findViewById(R.id.startTextView);
         startText.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +75,11 @@ public class MainActivity extends AppCompatActivity {
         hp = 3;
         score = 0;
         chanceLimit = 99.5;
-        buttons = new ArrayList<>();
 
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Button button = (Button) v;
+                final CustomButton button = (CustomButton) v;
 
                 //Disable button, preventing player from clicking button twice in a row.
                 button.setEnabled(false);
@@ -92,19 +90,17 @@ public class MainActivity extends AppCompatActivity {
                 //Scale button
                 button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
 
-                //Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
+//                Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         // Actions to do after 0.5 seconds
 
                         //Remove button.
-                        buttons.remove(button);
                         button.setVisibility(View.GONE);
 
                         //Set background color of pressed button.
-                        ColorDrawable buttonColor = (ColorDrawable) button.getBackground();
-                        cl.setBackgroundColor(buttonColor.getColor());
+                        cl.setBackgroundColor(Integer.parseInt(button.getTag().toString()));
                     }
                 }, 500);
 
@@ -117,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (score % 20 == 0) {
                     if (speed > 2000) {
-                        speed-=200;
+                        speed-=350;
                     }
-                    chanceLimit-=0.2;
+                    chanceLimit-=0.4;
                 }
             }
         };
@@ -136,14 +132,11 @@ public class MainActivity extends AppCompatActivity {
 
         newFall();
         newFall();
-        newFall();
-        newFall();
     }
 
     private void newFall() {
         final int screenHeight = getResources().getDisplayMetrics().heightPixels;
         final CustomButton button = new CustomButton(this);
-        buttons.add(button);
         if (hp > 0) {
             button.setOnClickListener(onClickListener);
         }
@@ -155,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        buttons.remove(button);
                         button.setVisibility(View.GONE);
                         takeDmg();
                         if (hp != 0) {
@@ -195,10 +187,8 @@ public class MainActivity extends AppCompatActivity {
         tryAgainText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (CustomButton button : buttons) {
-                    finish();
-                    startActivity(getIntent());
-                }
+                finish();
+                startActivity(getIntent());
             }
         });
     }
