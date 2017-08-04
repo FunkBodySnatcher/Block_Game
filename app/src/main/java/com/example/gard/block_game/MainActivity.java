@@ -1,5 +1,6 @@
 package com.example.gard.block_game;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
 
 //                Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
+                newFall();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -100,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 }, 500);
 
                 int chance = ran.nextInt(101);
-                newFall();
                 if (chance > chanceLimit) {
                     newFall();
                 }
@@ -144,8 +145,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void incScore() {
-        score++;
-        scoreTracker.setText(String.valueOf(score));
+        if (hp != 0) {
+            score++;
+            scoreTracker.setText(String.valueOf(score));
+        }
     }
 
     private void takeDmg() {
@@ -178,6 +181,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(getIntent());
+            }
+        });
+        mainMenuText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), MainActivity.class));
             }
         });
     }
