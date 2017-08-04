@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,23 +25,26 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout cl;
     private View.OnClickListener onClickListener;
 
+    private int screenHeight;
+
     private int speed;
     private int hp;
     private int score;
     private Double chanceLimit;
+
+    private ArrayList<CustomButton> buttons = new ArrayList<>();
 
     //Ending stuff
     private TextView gameoverText;
     private TextView mainMenuText;
     private TextView tryAgainText;
 
-    TextView testText; //REMOVE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        testText = (TextView) findViewById(R.id.testText); //REMOVE
+
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
         scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
         heart1 = (ImageView)findViewById(R.id.heart1);
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         gameoverText = (TextView) findViewById(R.id.gameoverText);
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final CustomButton button = (CustomButton) v;
+                buttons.remove(button);
 
                 button.setStroke(0, Color.BLACK);
 
@@ -122,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newFall() {
-        final int screenHeight = getResources().getDisplayMetrics().heightPixels;
         final CustomButton button = new CustomButton(this);
+        buttons.add(button);
         if (hp > 0) {
             button.setOnClickListener(onClickListener);
         }
@@ -135,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
+                        buttons.remove(button);
                         button.setVisibility(View.GONE);
                         takeDmg();
                         if (hp != 0) {
@@ -176,6 +183,9 @@ public class MainActivity extends AppCompatActivity {
         gameoverText.setVisibility(View.VISIBLE);
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
+        for (CustomButton btn : buttons) {
+            btn.setOnClickListener(null);
+        }
         tryAgainText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

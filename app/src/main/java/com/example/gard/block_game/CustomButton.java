@@ -12,6 +12,7 @@ public class CustomButton extends AppCompatButton {
     private Random ran = new Random();
     private GradientDrawable shape = new GradientDrawable();
     private int color = Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256));
+    private int index;
 
     public CustomButton(Context context) {
         super(context);
@@ -51,5 +52,13 @@ public class CustomButton extends AppCompatButton {
 
     public int getColor() {
         return color;
+    }
+
+    public void setIndex(int newIndex) {
+        index = newIndex;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }
