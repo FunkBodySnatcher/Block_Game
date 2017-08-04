@@ -153,15 +153,15 @@ public class MainActivity extends AppCompatActivity {
         switch (hp) {
             case 2:
 //                heart3.setAlpha(0.1f);
-                heart3.setImageResource(R.drawable.heartlost);
+                heart3.setImageResource(R.drawable.blackheart);
                 break;
             case 1:
 //                heart2.setAlpha(0.1f);
-                heart2.setImageResource(R.drawable.heartlost);
+                heart2.setImageResource(R.drawable.blackheart);
                 break;
             case 0:
 //                heart1.setAlpha(0.1f);
-                heart1.setImageResource(R.drawable.heartlost);
+                heart1.setImageResource(R.drawable.blackheart);
                 setEnding();
                 break;
             default:
