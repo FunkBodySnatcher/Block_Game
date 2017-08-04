@@ -2,7 +2,6 @@ package com.example.gard.block_game;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -135,17 +134,8 @@ public class MainActivity extends AppCompatActivity {
         heart2.setVisibility(View.VISIBLE);
         heart3.setVisibility(View.VISIBLE);
 
-        //Set scoreTracker to front.
-        //TODO: Currently working for API >= 21. Fix for API 20 and <
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            scoreTracker.setElevation(2);
-            heart1.setElevation(2);
-            heart2.setElevation(2);
-            heart3.setElevation(2);
-        } else {
-            //?????? bringtofront fungerer ikke!!!
-        }
-
+        newFall();
+        newFall();
         newFall();
         newFall();
     }
@@ -184,13 +174,13 @@ public class MainActivity extends AppCompatActivity {
         hp--;
         switch (hp) {
             case 2:
-                heart3.setVisibility(View.INVISIBLE);
+                heart3.setAlpha(0.1f);
                 break;
             case 1:
-                heart2.setVisibility(View.INVISIBLE);
+                heart2.setAlpha(0.1f);
                 break;
             case 0:
-                heart1.setVisibility(View.INVISIBLE);
+                heart1.setAlpha(0.1f);
                 setEnding();
                 break;
             default:
@@ -199,9 +189,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setEnding() {
-        for (CustomButton button : buttons) {
-            button.animate().cancel();
-        }
         gameoverText.setVisibility(View.VISIBLE);
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
@@ -209,13 +196,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 for (CustomButton button : buttons) {
-                    button.setVisibility(View.GONE);
-                    buttons.remove(button);
+                    finish();
+                    startActivity(getIntent());
                 }
-                gameoverText.setVisibility(View.INVISIBLE);
-                mainMenuText.setVisibility(View.INVISIBLE);
-                tryAgainText.setVisibility(View.INVISIBLE);
-                startGame();
             }
         });
     }
