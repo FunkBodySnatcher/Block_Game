@@ -1,6 +1,8 @@
 package com.example.gard.block_game;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int speed;
     private int hp;
     private int score;
+    private int highscore;
     private Double chanceLimit;
 
     //Ending stuff
@@ -173,9 +176,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setEnding() {
+
         gameoverText.setVisibility(View.VISIBLE);
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
+
+        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
+        highscore = prefs.getInt("score", 0);
+
+        if (highscore < score) {
+
+            highscore = score;
+            prefs.edit().putInt("score", highscore).apply();
+
+        }
+
         tryAgainText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -186,7 +201,12 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), MainmenuActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
+
+                //Make score info available to be reached by other activities.
+                intent.putExtra("highscore", highscore);
+                startActivity(intent);
+
             }
         });
     }

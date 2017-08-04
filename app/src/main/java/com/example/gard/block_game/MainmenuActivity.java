@@ -9,11 +9,21 @@ import android.widget.TextView;
 
 public class MainmenuActivity extends AppCompatActivity {
     private TextView playText;
+    private TextView highscoreText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
+
+        highscoreText = (TextView) findViewById(R.id.highscoreCountText);
+
+        //Get score from MainActivity
+        Intent intent = getIntent();
+        int highscore = intent.getIntExtra("highscore", 0);
+
+        //Set the highscore
+        highscoreText.setText(String.valueOf(highscore));
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
