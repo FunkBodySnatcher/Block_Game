@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView heart3;
     private ConstraintLayout cl;
     private View.OnClickListener onClickListener;
+    private TextView countdown;
 
     private int screenHeight;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
         screenHeight = getResources().getDisplayMetrics().heightPixels;
+        countdown = (TextView) findViewById(R.id.countdownText);
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -67,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
         cl.setBackgroundColor(Color.LTGRAY);
 
         //countdown
-        startGame();
+        countdown();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                startGame();
+            }
+        }, 2400);
     }
 
     private void startGame(){
@@ -94,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
 
 //                Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
-                newFall();
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -107,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 500);
 
+                newFall();
                 int chance = ran.nextInt(101);
                 if (chance > chanceLimit) {
                     newFall();
@@ -115,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (score % 20 == 0) {
                     if (speed > 2000) {
-                        speed-=350;
+                        speed-=370;
                     }
                     chanceLimit-=0.4;
                 }
@@ -123,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         scoreTracker.setText(String.valueOf(score));
+
         newFall();
         newFall();
     }
@@ -197,6 +206,49 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(), MainmenuActivity.class));
+            }
+        });
+    }
+
+    private void countdown() {
+        countdown.setVisibility(View.VISIBLE);
+        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                countdown.setText(String.valueOf(2));
+                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                countdown.setText(String.valueOf(1));
+                                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                countdown.setVisibility(View.INVISIBLE);
+                                                            }
+                                                        });
+                                                    }
+                                                });
+
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
         });
     }

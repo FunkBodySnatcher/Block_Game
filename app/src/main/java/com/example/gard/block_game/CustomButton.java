@@ -40,7 +40,7 @@ public class CustomButton extends AppCompatButton {
         setStroke(10, Color.BLACK);
         setBackgroundDrawable(shape);
 
-        int y = -(ran.nextInt(screenHeight)-40);
+        int y = -(ran.nextInt(screenHeight+100)+screenWidth/5);
         setY(y);
         setX(ran.nextInt(screenWidth-280));
         setRotation(ran.nextInt(90));
