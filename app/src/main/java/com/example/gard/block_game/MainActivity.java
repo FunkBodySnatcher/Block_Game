@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final CustomButton button = (CustomButton) v;
 
+                button.setStroke(0, Color.BLACK);
+
                 //Disable button, preventing player from clicking button twice in a row.
                 button.setEnabled(false);
 
@@ -95,12 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     public void run() {
                         // Actions to do after 0.5 seconds
-
                         //Remove button.
                         button.setVisibility(View.GONE);
 
                         //Set background color of pressed button.
-                        cl.setBackgroundColor(Integer.parseInt(button.getTag().toString()));
+                        cl.setBackgroundColor(button.getColor());
                     }
                 }, 500);
 
