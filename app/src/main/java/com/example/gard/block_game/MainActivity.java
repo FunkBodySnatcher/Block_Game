@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), MainActivity.class));
+                startActivity(new Intent(v.getContext(), MainmenuActivity.class));
             }
         });
     }
