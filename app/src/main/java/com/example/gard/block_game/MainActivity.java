@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(getIntent());
             }
         });
+
         mainMenuText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
