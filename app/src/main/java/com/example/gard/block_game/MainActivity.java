@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    //inc score
     private void incScore() {
         if (hp != 0) {
             score++;
