@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout cl;
     private View.OnClickListener onClickListener;
 
-    private ArrayList<CustomButton> buttons = new ArrayList<>();
-    private int speed = 5000;
-    private int hp = 3;
-    private int score = 0;
-    private Double chanceLimit = 99.5;
+    private ArrayList<CustomButton> buttons;
+    private int speed;
+    private int hp;
+    private int score;
+    private Double chanceLimit;
 
     //Ending stuff
     private TextView gameoverText;
@@ -69,6 +69,16 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         cl.setBackgroundColor(Color.LTGRAY);
+
+    }
+
+    private void startGame(){
+        speed = 5000;
+        hp = 3;
+        score = 0;
+        chanceLimit = 99.5;
+        buttons = new ArrayList<>();
+
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,19 +116,15 @@ public class MainActivity extends AppCompatActivity {
                 }
                 incScore();
 
-                if (score % 2 == 0) {
-                    speed-=500;
-                    chanceLimit-=0.5;
+                if (score % 20 == 0) {
+                    if (speed > 2000) {
+                        speed-=200;
+                    }
+                    chanceLimit-=0.2;
                 }
             }
         };
-    }
 
-    private void startGame(){
-        speed = 5000;
-        hp = 3;
-        score = 0;
-        chanceLimit = 99.5;
         scoreTracker.setText(String.valueOf(score));
         //Hide start text.
         startText.setVisibility(View.INVISIBLE);
@@ -140,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             //?????? bringtofront fungerer ikke!!!
         }
 
+        newFall();
         newFall();
     }
 

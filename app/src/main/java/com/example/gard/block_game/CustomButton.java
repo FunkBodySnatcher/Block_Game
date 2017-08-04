@@ -33,9 +33,9 @@ public class CustomButton extends AppCompatButton {
         setBackgroundColor(Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256)));
         setLayoutParams(new ConstraintLayout.LayoutParams(270, 270));
 
-        int y = -(ran.nextInt(screenHeight)+10);
+        int y = -(ran.nextInt(screenHeight)+20);
         setY(y);
-        setX(ran.nextInt(700));
-        setRotation(ran.nextInt(360));
+        setX(ran.nextInt(screenWidth-getWidth()-100));
+        setRotation(ran.nextInt(90));
     }
 }
