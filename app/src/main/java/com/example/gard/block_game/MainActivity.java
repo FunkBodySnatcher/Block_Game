@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private Random ran = new Random();
 
     //Define text
-    private TextView startText;
     private TextView scoreTracker;
     private ImageView heart1;
     private ImageView heart2;
@@ -42,13 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         testText = (TextView) findViewById(R.id.testText); //REMOVE
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
-        startText = (TextView) findViewById(R.id.startTextView);
-        startText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGame();
-            }
-        });
         scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
         heart1 = (ImageView)findViewById(R.id.heart1);
         heart2 = (ImageView)findViewById(R.id.heart2);
@@ -68,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         cl.setBackgroundColor(Color.LTGRAY);
 
+        //countdown
+        startGame();
     }
 
     private void startGame(){
@@ -122,8 +116,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         scoreTracker.setText(String.valueOf(score));
-        //Hide start text.
-        startText.setVisibility(View.INVISIBLE);
 
         //Show scoreTracker and hearts.
         scoreTracker.setVisibility(View.VISIBLE);
