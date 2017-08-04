@@ -8,6 +8,58 @@
     tools:context="com.example.gard.block_game.MainActivity">
 
     <TextView
+        android:id="@+id/startTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:fontFamily="monospace"
+        android:text="Start"
+        android:textSize="40sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/heart1"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/unnamed" />
+
+    <ImageView
+        android:id="@+id/heart2"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/heart1"
+        app:layout_constraintRight_toLeftOf="@+id/heart1"
+        app:layout_constraintTop_toTopOf="@+id/heart1"
+        app:srcCompat="@drawable/unnamed" />
+
+    <ImageView
+        android:id="@+id/heart3"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/heart2"
+        app:layout_constraintRight_toLeftOf="@+id/heart2"
+        app:layout_constraintTop_toTopOf="@+id/heart2"
+        app:srcCompat="@drawable/unnamed" />
+
+    <TextView
         android:id="@+id/scoreTrackerTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,22 +72,57 @@
         android:text="0"
         android:textAllCaps="true"
         android:textSize="40sp"
+        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/startTextView"
+        android:id="@+id/gameoverText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:clickable="true"
         android:fontFamily="monospace"
         android:onClick="startGame"
-        android:text="Start"
-        android:textSize="40sp"
+        android:text="Game Over"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/mainMenuText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/mainMenuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Main Menu"
+        android:textSize="38sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tryAgainText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Try again"
+        android:textSize="38sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainMenuText" />
 
 </android.support.constraint.ConstraintLayout>

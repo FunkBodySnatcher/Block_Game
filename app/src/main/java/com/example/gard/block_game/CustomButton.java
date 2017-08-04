@@ -27,7 +27,15 @@ public class CustomButton extends AppCompatButton {
     }
 
     private void styleButton() {
+        final int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        final int screenHeight = getResources().getDisplayMetrics().heightPixels;
+
         setBackgroundColor(Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256)));
-        setLayoutParams(new ConstraintLayout.LayoutParams(200, 200));
+        setLayoutParams(new ConstraintLayout.LayoutParams(270, 270));
+
+        int y = -(ran.nextInt(screenHeight)+10);
+        setY(y);
+        setX(ran.nextInt(700));
+        setRotation(ran.nextInt(360));
     }
 }

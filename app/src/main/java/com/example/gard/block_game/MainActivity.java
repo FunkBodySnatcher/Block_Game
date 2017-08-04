@@ -1,5 +1,6 @@
 package com.example.gard.block_game;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,26 +21,43 @@ public class MainActivity extends AppCompatActivity {
 
     //Define text
     private TextView startText;
-
     private TextView scoreTracker;
-
+    private ImageView heart1;
+    private ImageView heart2;
+    private ImageView heart3;
     private ConstraintLayout cl;
-
-    private int screenWidth;
-    private int screenHeight;
-
     private View.OnClickListener onClickListener;
+
+    private ArrayList<CustomButton> buttons = new ArrayList<>();
+    private int speed = 5000;
+    private int hp = 3;
+    private int score = 0;
+    private Double chanceLimit = 99.5;
+
+    //Ending stuff
+    private TextView gameoverText;
+    private TextView mainMenuText;
+    private TextView tryAgainText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
-
-        //Getting screen size
-        screenWidth = getResources().getDisplayMetrics().widthPixels;
-        screenHeight = getResources().getDisplayMetrics().heightPixels;
+        startText = (TextView) findViewById(R.id.startTextView);
+        startText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+        scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
+        heart1 = (ImageView)findViewById(R.id.heart1);
+        heart2 = (ImageView)findViewById(R.id.heart2);
+        heart3 = (ImageView)findViewById(R.id.heart3);
+        gameoverText = (TextView) findViewById(R.id.gameoverText);
+        mainMenuText = (TextView) findViewById(R.id.mainMenuText);
+        tryAgainText = (TextView) findViewById(R.id.tryAgainText);
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -48,14 +68,7 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        //Get text
-        startText = (TextView) findViewById(R.id.startTextView);
-
-        scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
-
-        //Set scoretracker to invisible before pressing 'play'.
-        scoreTracker.setVisibility(View.INVISIBLE);
-
+        cl.setBackgroundColor(Color.LTGRAY);
         onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         // Actions to do after 0.5 seconds
 
                         //Remove button.
+                        buttons.remove(button);
                         button.setVisibility(View.GONE);
 
                         //Set background color of pressed button.
@@ -85,63 +99,117 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 500);
 
-                //button.setVisibility(View.INVISIBLE);
-
-                int nr = ran.nextInt(3);
-                switch (nr) {
-                    case 0: case 1:
-                        newFall();
-                        break;
-                    case 2:
-                        newFall();
-                        newFall();
-                        break;
-                    default:
-                        break;
+                int chance = ran.nextInt(101);
+                newFall();
+                if (chance > chanceLimit) {
+                    newFall();
                 }
                 incScore();
+
+                if (score % 2 == 0) {
+                    speed-=500;
+                    chanceLimit-=0.5;
+                }
             }
         };
     }
 
-    public void startGame(View view){
+    private void startGame(){
+        speed = 5000;
+        hp = 3;
+        score = 0;
+        chanceLimit = 99.5;
+        scoreTracker.setText(String.valueOf(score));
         //Hide start text.
         startText.setVisibility(View.INVISIBLE);
 
-        //Show scoreTracker.
+        //Show scoreTracker and hearts.
         scoreTracker.setVisibility(View.VISIBLE);
+        heart1.setVisibility(View.VISIBLE);
+        heart2.setVisibility(View.VISIBLE);
+        heart3.setVisibility(View.VISIBLE);
 
         //Set scoreTracker to front.
         //TODO: Currently working for API >= 21. Fix for API 20 and <
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             scoreTracker.setElevation(2);
+            heart1.setElevation(2);
+            heart2.setElevation(2);
+            heart3.setElevation(2);
         } else {
             //?????? bringtofront fungerer ikke!!!
         }
 
         newFall();
-        newFall();
-        newFall();
     }
 
-    public void newFall() {
-        CustomButton button = new CustomButton(this);
-        button.setOnClickListener(onClickListener);
+    private void newFall() {
+        final int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        final CustomButton button = new CustomButton(this);
+        buttons.add(button);
+        if (hp > 0) {
+            button.setOnClickListener(onClickListener);
+        }
         cl.addView(button);
-
-        int y = -(ran.nextInt(screenHeight)+50);
-        button.setY(y);
-        button.setX(ran.nextInt(700));
-
         button.animate()
-                .translationYBy(screenHeight + button.getHeight() - y)
+                .translationY(screenHeight)
                 .rotation(1080)
-                .setDuration(5000);
+                .setDuration(speed)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        buttons.remove(button);
+                        button.setVisibility(View.GONE);
+                        takeDmg();
+                        if (hp != 0) {
+                            newFall();
+                        }
+                    }
+                });
     }
 
-    public void incScore() {
-        int score = Integer.parseInt(scoreTracker.getText().toString());
+    private void incScore() {
         score++;
         scoreTracker.setText(String.valueOf(score));
+    }
+
+    private void takeDmg() {
+        hp--;
+        switch (hp) {
+            case 2:
+                heart3.setVisibility(View.INVISIBLE);
+                break;
+            case 1:
+                heart2.setVisibility(View.INVISIBLE);
+                break;
+            case 0:
+                heart1.setVisibility(View.INVISIBLE);
+                setEnding();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setEnding() {
+        for (CustomButton button : buttons) {
+            button.animate().cancel();
+        }
+        gameoverText.setVisibility(View.VISIBLE);
+        mainMenuText.setVisibility(View.VISIBLE);
+        tryAgainText.setVisibility(View.VISIBLE);
+        tryAgainText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (CustomButton button : buttons) {
+                    button.setVisibility(View.GONE);
+                    buttons.remove(button);
+                }
+                gameoverText.setVisibility(View.INVISIBLE);
+                mainMenuText.setVisibility(View.INVISIBLE);
+                tryAgainText.setVisibility(View.INVISIBLE);
+                startGame();
+            }
+        });
     }
 }
