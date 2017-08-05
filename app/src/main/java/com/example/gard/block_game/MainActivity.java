@@ -34,18 +34,20 @@ public class MainActivity extends AppCompatActivity {
     private Double chanceLimit;
     private Handler handler = new Handler();
 
+    private int screenWidth;
+    private int screenHeight;
+
     //Ending stuff
     private TextView gameoverText;
     private TextView mainMenuText;
     private TextView tryAgainText;
 
-    TextView testText; //REMOVE
+    private int nrBtns = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        testText = (TextView) findViewById(R.id.testText); //REMOVE
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
         scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
         heart1 = (ImageView)findViewById(R.id.heart1);
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
         countdown = (TextView) findViewById(R.id.countdownText);
+
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -111,16 +116,23 @@ public class MainActivity extends AppCompatActivity {
                 }, 500);
 
                 int chance = ran.nextInt(101);
-                if (chance > chanceLimit) {
+                if (nrBtns < 11 && chance > chanceLimit) {
                     newFall();
                 }
                 incScore();
 
                 if (score % 20 == 0) {
-                    if (speed > 2000) {
+                    if (score < 100 && speed > 1499) {
                         speed-=350;
+                    } else if (score >= 100 && score < 150 && speed > 1499) {
+                        speed-=250;
+                    } else if (score >= 150 && speed > 1499) {
+                        speed-=100;
                     }
                     chanceLimit-=0.4;
+                }
+                if ((ran.nextInt(100)+1) > 90 && score > 80) {
+                    spawnHeartPower();
                 }
             }
         };
@@ -128,10 +140,11 @@ public class MainActivity extends AppCompatActivity {
         scoreTracker.setText(String.valueOf(score));
         newFall();
         newFall();
+        newFall();
     }
 
     private void newFall() {
-        final int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        nrBtns++;
         final CustomButton button = new CustomButton(this);
         if (hp > 0) {
             button.setOnClickListener(onClickListener);
@@ -249,7 +262,6 @@ public class MainActivity extends AppCompatActivity {
                                                         });
                                                     }
                                                 });
-
                                             }
                                         });
                                     }
@@ -258,6 +270,37 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
+            }
+        });
+    }
+
+    private void spawnHeartPower() {
+        final HeartPower heartPower = new HeartPower(this);
+        cl.addView(heartPower);
+        heartPower.setPos();
+        heartPower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (hp) {
+                    case 1:
+                        hp++;
+                        heart2.setImageResource(R.drawable.heart);
+                        heartPower.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        hp++;
+                        heart3.setImageResource(R.drawable.heart);
+                        heartPower.setVisibility(View.GONE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        heartPower.animate().translationY(screenHeight).rotation(1080).setDuration(2500).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                heartPower.setVisibility(View.GONE);
             }
         });
     }

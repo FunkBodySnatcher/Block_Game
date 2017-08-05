@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
+
 import java.util.Random;
 
 public class CustomButton extends AppCompatButton {
@@ -30,14 +31,14 @@ public class CustomButton extends AppCompatButton {
     }
 
     private void styleButton() {
-        final int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        final int screenHeight = getResources().getDisplayMetrics().heightPixels;
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
 
         shape.setShape(GradientDrawable.RECTANGLE);
         shape.setCornerRadius(30);
         shape.setColor(color);
         shape.setSize(screenWidth/5, screenWidth/4);
-        setStroke(10, Color.BLACK);
+        shape.setStroke(10, Color.BLACK);
         setBackgroundDrawable(shape);
 
         int y = -(ran.nextInt(screenHeight+100)+screenWidth/5);
