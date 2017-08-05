@@ -1,6 +1,8 @@
 package com.example.gard.block_game;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -28,17 +30,36 @@ public class MainmenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutMenu);
+        //Define highscore text.
         highscoreText = (TextView) findViewById(R.id.highscoreText);
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
 
         //Get score from MainActivity
-        Intent intent = getIntent();
-        int highscore = intent.getIntExtra("highscore", 0);
+        int score = getIntent().getIntExtra("SCORE", 0);
 
-        //Set the highscore
-        highscoreText.setText("Highscore: " + String.valueOf(highscore));
+        //Set text for last recorded highscore.
+        highscoreText.setText("Highscore: " + score);
+
+        //Use sharedPreferences to save current highscore.
+        SharedPreferences settings = getSharedPreferences("HIGHSCORE", Context.MODE_PRIVATE);
+        int highscore = settings.getInt("HIGHSCORE", 0);
+
+        //Compare score to highscore in order to determine if there's been a new highscore.
+        if (score > highscore){
+            highscoreText.setText("Highscore: " + score);
+
+            //If there has, apply new highscore.
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("HIGHSCORE", score);
+            editor.apply();
+
+        } else { //If not
+
+            highscoreText.setText("Highscore: " + highscore);
+
+        }
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();

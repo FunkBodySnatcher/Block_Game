@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -219,15 +221,6 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
 
-        SharedPreferences prefs = this.getSharedPreferences("myPrefsKey", Context.MODE_PRIVATE);
-        highscore = prefs.getInt("score", 0);
-
-        if (highscore < score) {
-
-            highscore = score;
-            prefs.edit().putInt("score", highscore).apply();
-
-        }
 
         tryAgainText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,8 +235,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
 
-                //Make score info available to be reached by other activities.
-                intent.putExtra("highscore", highscore);
+                //Make score available for other activities.
+                intent.putExtra("SCORE", score);
+
                 startActivity(intent);
 
             }
