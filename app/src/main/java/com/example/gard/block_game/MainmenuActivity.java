@@ -3,6 +3,7 @@ package com.example.gard.block_game;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -14,8 +15,11 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainmenuActivity extends AppCompatActivity {
+    private TextView titleText;
     private TextView playText;
     private TextView highscoreText;
+    private TextView tutorialText;
+    private TextView statisticsText;
 
     private int screenWidth;
     private int screenHeight;
@@ -29,9 +33,24 @@ public class MainmenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+        //Get custom font from assets.
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fontymcfontface.ttf");
+
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutMenu);
-        //Define highscore text.
+
+        //Define texts.
+        titleText = (TextView) findViewById(R.id.titleText);
+        playText = (TextView) findViewById(R.id.playText);
+        tutorialText = (TextView) findViewById(R.id.tutorialText);
+        statisticsText = (TextView) findViewById(R.id.statisticsText);
         highscoreText = (TextView) findViewById(R.id.highscoreText);
+
+        //Set custom font to texts.
+        titleText.setTypeface(typeface);
+        playText.setTypeface(typeface);
+        tutorialText.setTypeface(typeface);
+        statisticsText.setTypeface(typeface);
+        highscoreText.setTypeface(typeface);
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -70,7 +89,6 @@ public class MainmenuActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        playText = (TextView) findViewById(R.id.playText);
         playText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
