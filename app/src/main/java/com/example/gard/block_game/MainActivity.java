@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mainMenuText;
     private TextView tryAgainText;
 
-    private int nrBtns = 0;
+    private int nrBtns = 3;
+    private boolean gameover = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        cl.setBackgroundColor(Color.LTGRAY);
+        cl.setBackgroundColor(Color.CYAN);
 
         countdown();
         handler.postDelayed(new Runnable() {
             public void run() {
                 startGame();
             }
-        }, 2400);
+        }, 2200);
     }
 
     private void startGame(){
@@ -115,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 500);
 
-                int chance = ran.nextInt(101);
-                if (nrBtns < 11 && chance > chanceLimit) {
+                int chance = ran.nextInt(100)+1;
+                if (nrBtns <= 6 && chance > chanceLimit) {
                     newFall();
+                    nrBtns++;
                 }
                 incScore();
 
@@ -126,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
                         speed-=350;
                     } else if (score >= 100 && score < 150 && speed > 1499) {
                         speed-=250;
-                    } else if (score >= 150 && speed > 1499) {
+                    } else if (score >= 150 && speed > 999) {
                         speed-=100;
                     }
-                    chanceLimit-=0.4;
+                    chanceLimit-=0.8;
                 }
-                if ((ran.nextInt(100)+1) > 90 && score > 80) {
+                if ((ran.nextInt(100)+1) > 94 && hp < 3) {
                     spawnHeartPower();
                 }
             }
@@ -144,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void newFall() {
-        nrBtns++;
         final CustomButton button = new CustomButton(this);
         if (hp > 0) {
             button.setOnClickListener(onClickListener);
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
     //inc score
     private void incScore() {
-        if (hp != 0) {
+        if (!gameover) {
             score++;
             scoreTracker.setText(String.valueOf(score));
         }
@@ -188,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
             case 0:
 //                heart1.setAlpha(0.1f);
                 heart1.setImageResource(R.drawable.blackheart);
+                gameover = true;
                 setEnding();
                 break;
             default:
@@ -281,19 +283,21 @@ public class MainActivity extends AppCompatActivity {
         heartPower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (hp) {
-                    case 1:
-                        hp++;
-                        heart2.setImageResource(R.drawable.heart);
-                        heartPower.setVisibility(View.GONE);
-                        break;
-                    case 2:
-                        hp++;
-                        heart3.setImageResource(R.drawable.heart);
-                        heartPower.setVisibility(View.GONE);
-                        break;
-                    default:
-                        break;
+                if (hp > 0) {
+                    switch (hp) {
+                        case 1:
+                            hp++;
+                            heart2.setImageResource(R.drawable.heart);
+                            heartPower.setVisibility(View.GONE);
+                            break;
+                        case 2:
+                            hp++;
+                            heart3.setImageResource(R.drawable.heart);
+                            heartPower.setVisibility(View.GONE);
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
         });
