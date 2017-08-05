@@ -13,7 +13,6 @@ public class CustomButton extends AppCompatButton {
     private Random ran = new Random();
     private GradientDrawable shape = new GradientDrawable();
     private int color = Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256));
-    private int index;
 
     public CustomButton(Context context) {
         super(context);
@@ -41,10 +40,14 @@ public class CustomButton extends AppCompatButton {
         shape.setStroke(10, Color.BLACK);
         setBackgroundDrawable(shape);
 
-        int y = -(ran.nextInt(screenHeight+100)+screenWidth/5);
+        int y = -(ran.nextInt(screenHeight+100)+screenWidth/4);
         setY(y);
-        setX(ran.nextInt(screenWidth-280));
+        setX(ran.nextInt(screenWidth-screenWidth/4));
         setRotation(ran.nextInt(90));
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            setTranslationZ(1);
+        }
     }
 
     public void setStroke(int nr, int color) {
@@ -53,13 +56,5 @@ public class CustomButton extends AppCompatButton {
 
     public int getColor() {
         return color;
-    }
-
-    public void setIndex(int newIndex) {
-        index = newIndex;
-    }
-
-    public int getIndex() {
-        return index;
     }
 }

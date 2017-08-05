@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame(){
-        speed = 5000;
+        speed = 4800;
         hp = 3;
         score = 0;
         chanceLimit = 99.5;
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                         //Remove button.
                         button.setVisibility(View.GONE);
 
-                        //Set background color of pressed button.
+                        //Set background color to color of pressed button.
                         cl.setBackgroundColor(button.getColor());
                     }
                 }, 500);
@@ -124,16 +124,16 @@ public class MainActivity extends AppCompatActivity {
                 incScore();
 
                 if (score % 20 == 0) {
-                    if (score < 100 && speed > 1499) {
-                        speed-=350;
-                    } else if (score >= 100 && score < 150 && speed > 1499) {
-                        speed-=250;
+                    if (score < 100) {
+                        speed-=300;
+                    } else if (score >= 100 && score < 150) {
+                        speed-=200;
                     } else if (score >= 150 && speed > 999) {
                         speed-=100;
                     }
                     chanceLimit-=0.8;
                 }
-                if ((ran.nextInt(100)+1) > 94 && hp < 3) {
+                if ((ran.nextInt(100)+1) > 94 && hp < 3 && score >= 50) {
                     spawnHeartPower();
                 }
             }
@@ -141,30 +141,46 @@ public class MainActivity extends AppCompatActivity {
 
         scoreTracker.setText(String.valueOf(score));
         newFall();
-        newFall();
-        newFall();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                newFall();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        newFall();
+                    }
+                }, 1000);
+            }
+        }, 1000);
     }
 
     private void newFall() {
         final CustomButton button = new CustomButton(this);
-        if (hp > 0) {
-            button.setOnClickListener(onClickListener);
-        }
-        cl.addView(button);
-        button.animate()
-                .translationY(screenHeight)
-                .rotation(1080)
-                .setDuration(speed)
-                .withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        button.setVisibility(View.GONE);
-                        takeDmg();
-                        if (hp != 0) {
-                            newFall();
-                        }
-                    }
-                });
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (hp > 0) {
+                    button.setOnClickListener(onClickListener);
+                }
+                cl.addView(button);
+                button.animate()
+                        .translationY(screenHeight + screenHeight/5)
+                        .rotation(1080)
+                        .setDuration(speed)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                button.setVisibility(View.GONE);
+                                takeDmg();
+                                if (hp != 0) {
+                                    newFall();
+                                }
+                            }
+                        });
+            }
+        }, ran.nextInt(1001));
+
     }
 
     //inc score
@@ -301,11 +317,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        heartPower.animate().translationY(screenHeight).rotation(1080).setDuration(2500).withEndAction(new Runnable() {
-            @Override
-            public void run() {
-                heartPower.setVisibility(View.GONE);
-            }
-        });
+        heartPower.animate()
+                .translationY(screenHeight)
+                .rotation(1080)
+                .setDuration(speed-500)
+                .withEndAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        heartPower.setVisibility(View.GONE);
+                    }
+                });
     }
 }

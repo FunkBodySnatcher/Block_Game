@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light">
@@ -14,12 +14,17 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="50dp"
-        android:text="---Cube Tap---"
-        android:textSize="60sp"
+        android:elevation="2dp"
+        android:text="Cube Tap"
+        android:textAllCaps="true"
+        android:textSize="56sp"
+        android:textStyle="bold|italic"
+        android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/playText"
@@ -28,12 +33,16 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="32dp"
+        android:elevation="2dp"
         android:text="Play"
         android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/tutorialText"
@@ -42,12 +51,16 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
+        android:elevation="2dp"
         android:text="Tutorial"
         android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playText" />
+        app:layout_constraintTop_toBottomOf="@+id/playText"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/statisticsText"
@@ -56,25 +69,32 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
+        android:elevation="2dp"
         android:text="Statistics"
         android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tutorialText" />
+        app:layout_constraintTop_toBottomOf="@+id/tutorialText"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/highscoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Highscore:"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.431" />
+        android:elevation="2dp"
+        android:text="Highscore:"
+        android:textSize="40sp"
+        android:textStyle="italic"
+        android:translationZ="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
