@@ -16,14 +16,14 @@ public class MainmenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
-        highscoreText = (TextView) findViewById(R.id.highscoreCountText);
+        highscoreText = (TextView) findViewById(R.id.highscoreText);
 
         //Get score from MainActivity
         Intent intent = getIntent();
         int highscore = intent.getIntExtra("highscore", 0);
 
         //Set the highscore
-        highscoreText.setText(String.valueOf(highscore));
+        highscoreText.setText("Highscore: " + String.valueOf(highscore));
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
