@@ -34,7 +34,7 @@ public class MainmenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         //Get custom font from assets.
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/fontymcfontface.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
 
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutMenu);
 

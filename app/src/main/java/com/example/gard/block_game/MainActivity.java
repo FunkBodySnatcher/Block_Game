@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -60,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
         countdown = (TextView) findViewById(R.id.countdownText);
+
+        //Get custom font from assets.
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
+
+        scoreTracker.setTypeface(typeface);
+        gameoverText.setTypeface(typeface);
+        mainMenuText.setTypeface(typeface);
+        tryAgainText.setTypeface(typeface);
+        countdown.setTypeface(typeface);
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
