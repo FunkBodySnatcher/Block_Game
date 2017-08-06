@@ -46,11 +46,11 @@ public class MainmenuActivity extends AppCompatActivity {
         highscoreText = (TextView) findViewById(R.id.highscoreText);
 
         //Set custom font to texts.
-        titleText.setTypeface(typeface);
-        playText.setTypeface(typeface);
-        tutorialText.setTypeface(typeface);
-        statisticsText.setTypeface(typeface);
-        highscoreText.setTypeface(typeface);
+//        titleText.setTypeface(typeface);
+//        playText.setTypeface(typeface);
+//        tutorialText.setTypeface(typeface);
+//        statisticsText.setTypeface(typeface);
+//        highscoreText.setTypeface(typeface);
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;

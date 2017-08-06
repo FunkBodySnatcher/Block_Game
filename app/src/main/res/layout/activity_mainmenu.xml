@@ -17,14 +17,14 @@
         android:elevation="2dp"
         android:text="Cube Tap"
         android:textAllCaps="true"
+        android:textColor="#000000"
         android:textSize="80sp"
         android:textStyle="bold|italic"
         android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#000000" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/playText"
@@ -35,13 +35,14 @@
         android:layout_marginTop="44dp"
         android:elevation="2dp"
         android:text="Play"
+        android:textColor="#000000"
         android:textSize="50sp"
+        android:textStyle="italic"
         android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
-        android:textColor="#000000"/>
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <TextView
         android:id="@+id/tutorialText"
@@ -52,13 +53,14 @@
         android:layout_marginTop="50dp"
         android:elevation="2dp"
         android:text="Tutorial"
+        android:textColor="#000000"
         android:textSize="50sp"
+        android:textStyle="italic"
         android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playText"
-        android:textColor="#000000"/>
+        app:layout_constraintTop_toBottomOf="@+id/playText" />
 
     <TextView
         android:id="@+id/statisticsText"
@@ -69,13 +71,14 @@
         android:layout_marginTop="50dp"
         android:elevation="2dp"
         android:text="Statistics"
+        android:textColor="#000000"
         android:textSize="50sp"
+        android:textStyle="italic"
         android:translationZ="2dp"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tutorialText"
-        android:textColor="#000000"/>
+        app:layout_constraintTop_toBottomOf="@+id/tutorialText" />
 
     <TextView
         android:id="@+id/highscoreText"
@@ -88,9 +91,10 @@
         android:elevation="2dp"
         android:text="Highscore:"
         android:textSize="50sp"
+        android:textStyle="italic"
         android:translationZ="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
