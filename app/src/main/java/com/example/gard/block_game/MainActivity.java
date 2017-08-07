@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        cl.setBackgroundColor(Color.CYAN);
-
         countdown();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 cl.addView(button);
                 button.animate()
                         .translationY(screenHeight + screenHeight/5)
-                        .rotation(1080)
+                        .rotationBy(1080)
                         .setDuration(speed)
                         .withEndAction(new Runnable() {
                             @Override
@@ -320,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         });
         heartPower.animate()
                 .translationY(screenHeight)
-                .rotation(1080)
+                .rotationBy(1080)
                 .setDuration(speed-500)
                 .withEndAction(new Runnable() {
                     @Override

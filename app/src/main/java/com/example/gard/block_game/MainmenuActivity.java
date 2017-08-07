@@ -96,6 +96,15 @@ public class MainmenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        tutorialText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), TutorialActivity.class);
+                startActivity(intent);
+            }
+        });
+
         backgroundRain();
     }
 
@@ -121,7 +130,7 @@ public class MainmenuActivity extends AppCompatActivity {
                 cl.addView(button);
                 button.animate()
                         .translationY(screenHeight + screenHeight/5)
-                        .rotation(1080)
+                        .rotationBy(1080)
                         .setDuration(ran.nextInt(1600) + 3001)
                         .withEndAction(new Runnable() {
                             @Override

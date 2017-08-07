@@ -2,29 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/constraintLayoutTutorial"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gard.block_game.MainActivity"
     android:background="@android:color/holo_blue_light">
-
-    <TextView
-        android:id="@+id/countdownText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="3"
-        android:textSize="120sp"
-        android:translationZ="2dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35000002" />
 
     <ImageView
         android:id="@+id/heart1"
@@ -34,6 +15,7 @@
         android:layout_marginRight="8dp"
         android:elevation="2dp"
         android:translationZ="2dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/heart" />
@@ -47,6 +29,7 @@
         android:layout_marginTop="0dp"
         android:elevation="2dp"
         android:translationZ="2dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/heart1"
         app:layout_constraintRight_toLeftOf="@+id/heart1"
         app:layout_constraintTop_toTopOf="@+id/heart1"
@@ -61,6 +44,7 @@
         android:layout_marginTop="0dp"
         android:elevation="2dp"
         android:translationZ="2dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/heart2"
         app:layout_constraintRight_toLeftOf="@+id/heart2"
         app:layout_constraintTop_toTopOf="@+id/heart2"
@@ -83,32 +67,13 @@
         android:textColor="#4D4A4A"
         android:textSize="60sp"
         android:translationZ="2dp"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/gameoverText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:clickable="true"
-        android:elevation="2dp"
-        android:fontFamily="monospace"
-        android:onClick="startGame"
-        android:text="Game Over"
-        android:textSize="46sp"
-        android:textStyle="bold"
-        android:translationZ="2dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/mainMenuText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <TextView
-        android:id="@+id/mainMenuText"
+        android:id="@+id/tutorialText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -116,29 +81,46 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:elevation="2dp"
-        android:text="Main Menu"
-        android:textSize="38sp"
+        android:text="Welcome to the tutorial \nfor Cube Tap"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        android:textStyle="italic"
         android:translationZ="2dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.517" />
 
     <TextView
-        android:id="@+id/tryAgainText"
+        android:id="@+id/heartsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/heart2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="@+id/heart3"
+        app:layout_constraintRight_toRightOf="@+id/heart1" />
+
+    <TextView
+        android:id="@+id/scoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:elevation="2dp"
-        android:text="Try again"
-        android:textSize="38sp"
-        android:translationZ="2dp"
-        android:visibility="invisible"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:visibility="visible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenuText" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreTrackerTextView" />
 
 </android.support.constraint.ConstraintLayout>

@@ -14,29 +14,31 @@ public class CustomButton extends AppCompatButton {
     private GradientDrawable shape = new GradientDrawable();
     private int color = Color.rgb(ran.nextInt(256),ran.nextInt(256),ran.nextInt(256));
 
+    private int screenWidth;
+    private int screenHeight;
+
     public CustomButton(Context context) {
         super(context);
-        styleButton();
+        screenWidth = getResources().getDisplayMetrics().widthPixels;
+        screenHeight = getResources().getDisplayMetrics().heightPixels;
+        init();
     }
 
     public CustomButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        styleButton();
+        init();
     }
 
     public CustomButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        styleButton();
+        init();
     }
 
-    private void styleButton() {
-        int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        int screenHeight = getResources().getDisplayMetrics().heightPixels;
-
+    private void init() {
         shape.setShape(GradientDrawable.RECTANGLE);
         shape.setCornerRadius(30);
         shape.setColor(color);
-        shape.setSize(screenWidth/5, screenWidth/4);
+        shape.setSize(screenWidth/4, screenWidth/4);
         shape.setStroke(10, Color.BLACK);
         setBackgroundDrawable(shape);
 
@@ -50,11 +52,28 @@ public class CustomButton extends AppCompatButton {
         }
     }
 
+    public void styleButton(int x, int y, int rotation, int colorSpes) {
+        setY(y);
+        setX(x);
+        setRotation(rotation);
+        color = colorSpes;
+        shape.setColor(colorSpes);
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            setTranslationZ(1);
+        }
+    }
+
     public void setStroke(int nr, int color) {
         shape.setStroke(nr, color);
     }
 
     public int getColor() {
         return color;
+    }
+
+    public void setColor(int newColor) {
+        shape.setColor(newColor);
+        color = newColor;
     }
 }

@@ -38,4 +38,9 @@ public class HeartPower extends AppCompatImageView {
         setY(-(screenWidth/5));
         setX(ran.nextInt(screenWidth - (screenWidth/5)));
     }
+
+    public void tutorialHeart(int x, int y) {
+        setX(x);
+        setY(y);
+    }
 }
