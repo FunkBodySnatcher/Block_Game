@@ -1,8 +1,10 @@
 package com.example.gard.block_game;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -11,7 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private int nrBtns = 3;
     private boolean gameover = false;
 
+    MediaPlayer blockBoop;
+    MediaPlayer heartLoss;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
         countdown = (TextView) findViewById(R.id.countdownText);
+
+        blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
+
+        heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
 
         //Get custom font from assets.
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
@@ -109,7 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 //Scale button
                 button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
 
-//                Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
+                //Play sound effect
+                playLightBoop();
+
+                //Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
                 newFall();
                 handler.postDelayed(new Runnable() {
                     public void run() {
@@ -127,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     newFall();
                     nrBtns++;
                 }
+
                 incScore();
 
                 if (score % 20 == 0) {
@@ -186,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
                         });
             }
         }, ran.nextInt(1001));
-
     }
 
     //inc score
@@ -203,14 +221,17 @@ public class MainActivity extends AppCompatActivity {
             case 2:
 //                heart3.setAlpha(0.1f);
                 heart3.setImageResource(R.drawable.blackheart);
+                playLowBoop();
                 break;
             case 1:
 //                heart2.setAlpha(0.1f);
                 heart2.setImageResource(R.drawable.blackheart);
+                playLowBoop();
                 break;
             case 0:
 //                heart1.setAlpha(0.1f);
                 heart1.setImageResource(R.drawable.blackheart);
+                playLowBoop();
                 gameover = true;
                 setEnding();
                 break;
@@ -232,6 +253,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(getIntent());
+                playLowBoop();
             }
         });
 
@@ -239,6 +261,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
+
+                playLowBoop();
 
                 //Make score available for other activities.
                 intent.putExtra("SCORE", score);
@@ -251,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void countdown() {
         countdown.setVisibility(View.VISIBLE);
+        playLowBoop();
         countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0).withEndAction(new Runnable() {
             @Override
             public void run() {
@@ -261,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 countdown.setText(String.valueOf(2));
+                                playLowBoop();
                                 countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
                                     @Override
                                     public void run() {
@@ -268,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 countdown.setText(String.valueOf(1));
+                                                playLowBoop();
                                                 countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
                                                     @Override
                                                     public void run() {
@@ -327,4 +354,29 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void playLightBoop(){
+        try {
+            if(blockBoop.isPlaying()){
+                blockBoop.stop();
+                blockBoop.release();
+                blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
+            } blockBoop.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void playLowBoop(){
+        try {
+            if(heartLoss.isPlaying()){
+                heartLoss.stop();
+                heartLoss.release();
+                heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
+            } heartLoss.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

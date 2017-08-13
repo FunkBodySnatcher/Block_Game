@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -12,6 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.Random;
 
 public class MainmenuActivity extends AppCompatActivity {
@@ -19,7 +26,7 @@ public class MainmenuActivity extends AppCompatActivity {
     private TextView playText;
     private TextView highscoreText;
     private TextView tutorialText;
-    private TextView statisticsText;
+    private TextView aboutTextView;
 
     private int screenWidth;
     private int screenHeight;
@@ -28,13 +35,16 @@ public class MainmenuActivity extends AppCompatActivity {
     private ConstraintLayout cl;
     private Random ran = new Random();
 
+    MediaPlayer heartLoss;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
         //Get custom font from assets.
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/avanstile.ttf");
 
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutMenu);
 
@@ -42,15 +52,30 @@ public class MainmenuActivity extends AppCompatActivity {
         titleText = (TextView) findViewById(R.id.titleText);
         playText = (TextView) findViewById(R.id.playText);
         tutorialText = (TextView) findViewById(R.id.tutorialText);
-        statisticsText = (TextView) findViewById(R.id.statisticsText);
+        aboutTextView = (TextView) findViewById(R.id.aboutTextView);
         highscoreText = (TextView) findViewById(R.id.highscoreText);
 
+        heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
+
         //Set custom font to texts.
-//        titleText.setTypeface(typeface);
-//        playText.setTypeface(typeface);
-//        tutorialText.setTypeface(typeface);
-//        statisticsText.setTypeface(typeface);
-//        highscoreText.setTypeface(typeface);
+        //titleText.setTypeface(typeface);
+        //playText.setTypeface(typeface);
+        //tutorialText.setTypeface(typeface);
+        //aboutTextView.setTypeface(typeface);
+        //highscoreText.setTypeface(typeface);
+
+        //If application if opened for the first time, start the tutorial.
+        SharedPreferences firstRun = null;
+        firstRun = getSharedPreferences(getPackageName(), MODE_PRIVATE);
+
+        if (firstRun.getBoolean("firstRun", true)){
+
+            Intent tutorial = new Intent(getApplicationContext(), TutorialActivity.class);
+
+            startActivity(tutorial);
+
+            firstRun.edit().putBoolean("firstRun", false).apply();
+        }
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -92,6 +117,7 @@ public class MainmenuActivity extends AppCompatActivity {
         playText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playLowBoop();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
             }
@@ -100,7 +126,17 @@ public class MainmenuActivity extends AppCompatActivity {
         tutorialText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playLowBoop();
                 Intent intent = new Intent(v.getContext(), TutorialActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        aboutTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                playLowBoop();
+                Intent intent = new Intent(v.getContext(), AboutActivity.class);
                 startActivity(intent);
             }
         });
@@ -142,4 +178,17 @@ public class MainmenuActivity extends AppCompatActivity {
             }
         }, ran.nextInt(4001));
     }
+
+    private void playLowBoop(){
+        try {
+            if(heartLoss.isPlaying()){
+                heartLoss.stop();
+                heartLoss.release();
+                heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
+            } heartLoss.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
