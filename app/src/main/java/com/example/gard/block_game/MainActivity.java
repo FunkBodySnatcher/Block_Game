@@ -379,4 +379,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Stop sounds when user exits application.
+    //Might include other activities in order not to lag device
+    @Override
+    protected void onPause() {
+        super.onPause();
+        blockBoop.stop();
+        heartLoss.stop();
+    }
 }

@@ -44,7 +44,7 @@ public class MainmenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         //Get custom font from assets.
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/avanstile.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
 
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutMenu);
 
@@ -58,11 +58,11 @@ public class MainmenuActivity extends AppCompatActivity {
         heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
 
         //Set custom font to texts.
-        //titleText.setTypeface(typeface);
-        //playText.setTypeface(typeface);
-        //tutorialText.setTypeface(typeface);
-        //aboutTextView.setTypeface(typeface);
-        //highscoreText.setTypeface(typeface);
+        titleText.setTypeface(typeface);
+        playText.setTypeface(typeface);
+        tutorialText.setTypeface(typeface);
+        aboutTextView.setTypeface(typeface);
+        highscoreText.setTypeface(typeface);
 
         //If application if opened for the first time, start the tutorial.
         SharedPreferences firstRun = null;

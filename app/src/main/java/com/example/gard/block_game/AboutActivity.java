@@ -15,7 +15,7 @@ public class AboutActivity extends AppCompatActivity{
 
         //Set back button. Not hiding action bar in order to simplify function.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("About");
 
         //Hide status bar.
         View decorView = getWindow().getDecorView();
