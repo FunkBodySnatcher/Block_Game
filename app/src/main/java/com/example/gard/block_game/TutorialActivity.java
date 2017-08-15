@@ -90,7 +90,7 @@ public class TutorialActivity extends AppCompatActivity {
                                 .withEndAction(new Runnable() {
                                     @Override
                                     public void run() {
-                                        scoreText.setText("That right there, is a cube");
+                                        scoreText.setText("Hold up. This is a Block.");
                                         textAnimationToScreen(scoreText);
                                         handler.postDelayed(new Runnable() {
                                             @Override
@@ -99,7 +99,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                 handler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        scoreText.setText("This is your current score...");
+                                                        scoreText.setText(".. And this is your current score...");
                                                         textAnimationToScreen(scoreText);
                                                         textAnimationToScreen(scoreTracker);
                                                         handler.postDelayed(new Runnable() {
@@ -118,7 +118,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                         handler.postDelayed(new Runnable() {
                                                                             @Override
                                                                             public void run() {
-                                                                                scoreText.setText("Tap the cube to increase your score");
+                                                                                scoreText.setText("Tap the block to increase your score. Neat.");
                                                                                 textAnimationToScreen(scoreText);
                                                                                 handler.postDelayed(new Runnable() {
                                                                                     @Override
@@ -136,7 +136,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                             @Override
                                                                                                             public void run() {
-                                                                                                                scoreText.setText("Woah, Don't get distracted!\nThe background likes to change");
+                                                                                                                scoreText.setText("OOhShi!, Don't get distracted!\nThe background tends to change");
                                                                                                                 textAnimationToScreen(scoreText);
                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                     @Override
@@ -145,7 +145,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                             @Override
                                                                                                                             public void run() {
-                                                                                                                                scoreText.setText("But if a cube falls to the ground...");
+                                                                                                                                scoreText.setText("If a block falls off the screen...");
                                                                                                                                 textAnimationToScreen(scoreText);
                                                                                                                                 final CustomButton button2 = new CustomButton(getApplicationContext());
                                                                                                                                 button2.styleButton((screenWidth / 2) - ((screenWidth / 4) / 2), (screenHeight / 2) - ((screenWidth / 4) / 2), 0, Color.rgb(20, 30, 200));
@@ -161,7 +161,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                                                     @Override
                                                                                                                                                     public void run() {
                                                                                                                                                         button2.setVisibility(View.GONE);
-                                                                                                                                                        heartsText.setText("...you lose \none of your hearts");
+                                                                                                                                                        heartsText.setText("...you will lose \none of your hearts!");
                                                                                                                                                         textAnimationToScreen(heartsText);
                                                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                                                             @Override
@@ -185,7 +185,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                                                                                         .withEndAction(new Runnable() {
                                                                                                                                                                                             @Override
                                                                                                                                                                                             public void run() {
-                                                                                                                                                                                                scoreText.setText("Tapping a falling heart will restore one");
+                                                                                                                                                                                                scoreText.setText("Tapping a falling heart will restore one of your lost hearts. Incredible!");
                                                                                                                                                                                                 textAnimationToScreen(scoreText);
                                                                                                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                                                                                                     @Override
@@ -199,7 +199,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                                                                                                                     @Override
                                                                                                                                                                                                                     public void run() {
-                                                                                                                                                                                                                        tutorialText.setText("You are now ready to play\nHave fun! :D\n\nMain Menu");
+                                                                                                                                                                                                                        tutorialText.setText("You are now ready to play\nHave fun!\n\nMain Menu");
                                                                                                                                                                                                                         textAnimationToScreen(tutorialText);
                                                                                                                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                                                                                                                             @Override

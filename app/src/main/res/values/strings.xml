@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Block_Game</string>
+    <string name="aboutText">
+        \n
+
+        <b>Insert name here</b> \n \n
+
+        This game is an independent project made by two novice developers, and will most likely contain small bugs that will be patched in future updates.\n \n
+        All fonts, visual effects, and sound effects used in this application are free-to-use products that are created to be used in a commercial context, and their respective creators will
+        be listed below along with the name of their resource and a link to their work.\n \n
+
+        If you are experiencing any bugs or problems, feel free to contact us at <b>kaggcontact@gmail.com</b>, or by leaving a reply in the google play store.\n \n
+
+        Resources used in this game:\n \n
+
+        <b>Sound effects:</b>\n \n
+
+        Name: Blop Sound\n
+        Creator:  Mark Diangelo\n
+        License: Attribution 3.0\n
+        Link: http://soundbible.com/2067-Blop.html\n \n
+
+        <b>Font:</b>\n \n
+
+        Name: Some Time Later Font\n
+        Creator: Infinite Type\n
+        License: SIL Open Font License (OFL)\n
+        Link: http://www.fontspace.com/infinite-type/some-time-later\n
+
+
+
+    </string>
 </resources>
