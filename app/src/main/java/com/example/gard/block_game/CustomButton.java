@@ -38,7 +38,7 @@ public class CustomButton extends AppCompatButton {
         shape.setShape(GradientDrawable.RECTANGLE);
         shape.setCornerRadius(30);
         shape.setColor(color);
-        shape.setSize(screenWidth/4, screenWidth/4);
+        shape.setSize((screenWidth/4), (screenWidth/4));
         shape.setStroke(10, Color.BLACK);
         setBackgroundDrawable(shape);
 

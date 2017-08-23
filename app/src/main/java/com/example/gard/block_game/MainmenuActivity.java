@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -36,7 +39,6 @@ public class MainmenuActivity extends AppCompatActivity {
     private Random ran = new Random();
 
     MediaPlayer heartLoss;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,9 @@ public class MainmenuActivity extends AppCompatActivity {
             startActivity(tutorial);
 
             firstRun.edit().putBoolean("firstRun", false).apply();
+
         }
+
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -190,5 +194,6 @@ public class MainmenuActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 
 }

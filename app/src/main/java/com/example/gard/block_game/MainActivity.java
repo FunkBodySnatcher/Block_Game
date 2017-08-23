@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setTypeface(typeface);
         tryAgainText.setTypeface(typeface);
         countdown.setTypeface(typeface);
+
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
@@ -387,4 +389,6 @@ public class MainActivity extends AppCompatActivity {
         blockBoop.stop();
         heartLoss.stop();
     }
+
+
 }

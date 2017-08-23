@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -99,7 +100,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                 handler.postDelayed(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        scoreText.setText(".. And this is your current score...");
+                                                        scoreText.setText("This is your current score...");
                                                         textAnimationToScreen(scoreText);
                                                         textAnimationToScreen(scoreTracker);
                                                         handler.postDelayed(new Runnable() {
@@ -201,6 +202,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                                                                                                                     public void run() {
                                                                                                                                                                                                                         tutorialText.setText("You are now ready to play\nHave fun!\n\nMain Menu");
                                                                                                                                                                                                                         textAnimationToScreen(tutorialText);
+                                                                                                                                                                                                                        animationMessage();
                                                                                                                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                                                                                                                             @Override
                                                                                                                                                                                                                             public void run() {
@@ -264,7 +266,10 @@ public class TutorialActivity extends AppCompatActivity {
                 }, 2500);
             }
         }, 1000);
+
     }
+
+
 
     private void textAnimationToScreen(View view) {
         view.animate().scaleXBy(1f).scaleYBy(1f).setDuration(500);
@@ -307,5 +312,20 @@ public class TutorialActivity extends AppCompatActivity {
         newFall();
         newFall();
         newFall();
+    }
+
+    private void animationMessage(){
+
+        AlertDialog.Builder alertMessage = new AlertDialog.Builder(TutorialActivity.this);
+        alertMessage.setTitle("Animations");
+        alertMessage.setMessage(" Hi there! Our game heavily relies on animations, and in order for it to work, you need to have your animations turned on!"+
+                " If you go into Settings -> Developer settings, scroll down to settings for animations"+
+                " (There are three individual settings) and select animation scale x1 for each of them."+
+                " If you do not have the option to select developers options, you are all set!"+
+                " Pro tip: If you, for any reason, want to enabled developer settings, you can go into 'About this phone' and then press the 'Build number'"+
+                " seven times to enabled this feature.");
+        alertMessage.setPositiveButton("GOT IT!", null);
+        alertMessage.show();
+
     }
 }
