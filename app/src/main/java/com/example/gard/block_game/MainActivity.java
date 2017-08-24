@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     MediaPlayer blockBoop;
     MediaPlayer heartLoss;
+    MediaPlayer heartPickUp;
 
 
     @Override
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
 
         heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
+
+        heartPickUp = MediaPlayer.create(getApplicationContext(), R.raw.heart);
 
         //Get custom font from assets.
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
@@ -327,6 +330,7 @@ public class MainActivity extends AppCompatActivity {
         heartPower.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                heartPickUpSound();
                 if (hp > 0) {
                     switch (hp) {
                         case 1:
@@ -376,6 +380,18 @@ public class MainActivity extends AppCompatActivity {
                 heartLoss.release();
                 heartLoss = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
             } heartLoss.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void heartPickUpSound(){
+        try {
+            if(heartPickUp.isPlaying()){
+                heartPickUp.stop();
+                heartPickUp.release();
+                heartPickUp = MediaPlayer.create(getApplicationContext(), R.raw.bvoplow);
+            } heartPickUp.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
