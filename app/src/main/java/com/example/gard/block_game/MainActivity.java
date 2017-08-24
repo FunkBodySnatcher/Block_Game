@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer heartLoss;
     MediaPlayer heartPickUp;
 
+    //Variabel for reklame.
+    private InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText = (TextView) findViewById(R.id.mainMenuText);
         tryAgainText = (TextView) findViewById(R.id.tryAgainText);
         countdown = (TextView) findViewById(R.id.countdownText);
+
+        //Test-id for reklame.
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
 
@@ -248,6 +261,10 @@ public class MainActivity extends AppCompatActivity {
         gameoverText.setOnClickListener(null);
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
+
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
 
         handler.postDelayed(new Runnable() {
             @Override
