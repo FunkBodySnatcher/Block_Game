@@ -81,18 +81,18 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:elevation="2dp"
-        android:text="Welcome to the tutorial \nfor Cube Tap"
+        android:text="Welcome to the tutorial \nfor Rainbow Tap"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="italic"
         android:translationZ="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintHorizontal_bias="0.517" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/heartsText"

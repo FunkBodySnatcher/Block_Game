@@ -128,128 +128,123 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                             @Override
                                                                                             public void onClick(View v) {
                                                                                                 scoreTracker.setText("1");
-                                                                                                scoreText.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0);
-                                                                                                button.animate().scaleXBy(50).scaleYBy(50).setDuration(500).withEndAction(new Runnable() {
+                                                                                                scoreText.setVisibility(View.INVISIBLE);
+                                                                                                button.animate().scaleXBy(20).scaleYBy(20).setDuration(300).withEndAction(new Runnable() {
                                                                                                     @Override
                                                                                                     public void run() {
                                                                                                         button.setVisibility(View.GONE);
                                                                                                         cl.setBackgroundColor(button.getColor());
+                                                                                                        scoreText.setText("OOhShi!, Don't get distracted!\nThe background tends to change");
+                                                                                                        scoreText.setVisibility(View.VISIBLE);
                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                             @Override
                                                                                                             public void run() {
-                                                                                                                scoreText.setText("OOhShi!, Don't get distracted!\nThe background tends to change");
-                                                                                                                textAnimationToScreen(scoreText);
+                                                                                                                textAnimationFromScreen(scoreText);
                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                     @Override
                                                                                                                     public void run() {
-                                                                                                                        textAnimationFromScreen(scoreText);
+                                                                                                                        scoreText.setText("If a block falls off the screen...");
+                                                                                                                        textAnimationToScreen(scoreText);
+                                                                                                                        final CustomButton button2 = new CustomButton(getApplicationContext());
+                                                                                                                        button2.styleButton((screenWidth / 2) - ((screenWidth / 4) / 2), (screenHeight / 2) - ((screenWidth / 4) / 2), 0, Color.rgb(20, 30, 200));
+                                                                                                                        cl.addView(button2);
                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                             @Override
                                                                                                                             public void run() {
-                                                                                                                                scoreText.setText("If a block falls off the screen...");
-                                                                                                                                textAnimationToScreen(scoreText);
-                                                                                                                                final CustomButton button2 = new CustomButton(getApplicationContext());
-                                                                                                                                button2.styleButton((screenWidth / 2) - ((screenWidth / 4) / 2), (screenHeight / 2) - ((screenWidth / 4) / 2), 0, Color.rgb(20, 30, 200));
-                                                                                                                                cl.addView(button2);
-                                                                                                                                handler.postDelayed(new Runnable() {
-                                                                                                                                    @Override
-                                                                                                                                    public void run() {
-                                                                                                                                        button2.animate()
-                                                                                                                                                .translationY(screenHeight + screenHeight / 4)
-                                                                                                                                                .rotationBy(720)
-                                                                                                                                                .setDuration(2500)
-                                                                                                                                                .withEndAction(new Runnable() {
+                                                                                                                                button2.animate()
+                                                                                                                                        .translationY(screenHeight + screenHeight / 4)
+                                                                                                                                        .rotationBy(720)
+                                                                                                                                        .setDuration(2500)
+                                                                                                                                        .withEndAction(new Runnable() {
+                                                                                                                                            @Override
+                                                                                                                                            public void run() {
+                                                                                                                                                button2.setVisibility(View.GONE);
+                                                                                                                                                heartsText.setText("...you will lose \none of your hearts!");
+                                                                                                                                                textAnimationToScreen(heartsText);
+                                                                                                                                                handler.postDelayed(new Runnable() {
                                                                                                                                                     @Override
                                                                                                                                                     public void run() {
-                                                                                                                                                        button2.setVisibility(View.GONE);
-                                                                                                                                                        heartsText.setText("...you will lose \none of your hearts!");
-                                                                                                                                                        textAnimationToScreen(heartsText);
+                                                                                                                                                        heart3.setImageResource(R.drawable.blackheart);
                                                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                                                             @Override
                                                                                                                                                             public void run() {
-                                                                                                                                                                heart3.setImageResource(R.drawable.blackheart);
+                                                                                                                                                                textAnimationFromScreen(heartsText);
+                                                                                                                                                                textAnimationFromScreen(scoreText);
                                                                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                                                                     @Override
                                                                                                                                                                     public void run() {
-                                                                                                                                                                        textAnimationFromScreen(heartsText);
-                                                                                                                                                                        textAnimationFromScreen(scoreText);
-                                                                                                                                                                        handler.postDelayed(new Runnable() {
-                                                                                                                                                                            @Override
-                                                                                                                                                                            public void run() {
-                                                                                                                                                                                final HeartPower heartPower = new HeartPower(getApplicationContext());
-                                                                                                                                                                                heartPower.tutorialHeart(screenWidth / 2 - (screenWidth / 5) / 2, -400);
-                                                                                                                                                                                cl.addView(heartPower);
-                                                                                                                                                                                heartPower.animate()
-                                                                                                                                                                                        .translationY(screenHeight / 2 - (screenWidth / 5) / 2)
-                                                                                                                                                                                        .rotation(720)
-                                                                                                                                                                                        .setDuration(2000)
-                                                                                                                                                                                        .withEndAction(new Runnable() {
+                                                                                                                                                                        final HeartPower heartPower = new HeartPower(getApplicationContext());
+                                                                                                                                                                        heartPower.tutorialHeart(screenWidth / 2 - (screenWidth / 5) / 2, -400);
+                                                                                                                                                                        cl.addView(heartPower);
+                                                                                                                                                                        heartPower.animate()
+                                                                                                                                                                                .translationY(screenHeight / 2 - (screenWidth / 5) / 2)
+                                                                                                                                                                                .rotation(720)
+                                                                                                                                                                                .setDuration(2000)
+                                                                                                                                                                                .withEndAction(new Runnable() {
+                                                                                                                                                                                    @Override
+                                                                                                                                                                                    public void run() {
+                                                                                                                                                                                        scoreText.setText("Tapping a falling heart will restore one of your lost hearts. Incredible!");
+                                                                                                                                                                                        textAnimationToScreen(scoreText);
+                                                                                                                                                                                        handler.postDelayed(new Runnable() {
                                                                                                                                                                                             @Override
                                                                                                                                                                                             public void run() {
-                                                                                                                                                                                                scoreText.setText("Tapping a falling heart will restore one of your lost hearts. Incredible!");
-                                                                                                                                                                                                textAnimationToScreen(scoreText);
-                                                                                                                                                                                                handler.postDelayed(new Runnable() {
+                                                                                                                                                                                                heartPower.setOnClickListener(new View.OnClickListener() {
                                                                                                                                                                                                     @Override
-                                                                                                                                                                                                    public void run() {
-                                                                                                                                                                                                        heartPower.setOnClickListener(new View.OnClickListener() {
+                                                                                                                                                                                                    public void onClick(View v) {
+                                                                                                                                                                                                        heartPower.setVisibility(View.GONE);
+                                                                                                                                                                                                        heart3.setImageResource(R.drawable.heart);
+                                                                                                                                                                                                        textAnimationFromScreen(scoreText);
+                                                                                                                                                                                                        handler.postDelayed(new Runnable() {
                                                                                                                                                                                                             @Override
-                                                                                                                                                                                                            public void onClick(View v) {
-                                                                                                                                                                                                                heartPower.setVisibility(View.GONE);
-                                                                                                                                                                                                                heart3.setImageResource(R.drawable.heart);
-                                                                                                                                                                                                                textAnimationFromScreen(scoreText);
+                                                                                                                                                                                                            public void run() {
+                                                                                                                                                                                                                tutorialText.setText("You are now ready to play\nHave fun!\n\nMain Menu");
+                                                                                                                                                                                                                textAnimationToScreen(tutorialText);
+                                                                                                                                                                                                                animationMessage();
                                                                                                                                                                                                                 handler.postDelayed(new Runnable() {
                                                                                                                                                                                                                     @Override
                                                                                                                                                                                                                     public void run() {
-                                                                                                                                                                                                                        tutorialText.setText("You are now ready to play\nHave fun!\n\nMain Menu");
-                                                                                                                                                                                                                        textAnimationToScreen(tutorialText);
-                                                                                                                                                                                                                        animationMessage();
+                                                                                                                                                                                                                        backgroundRain();
                                                                                                                                                                                                                         handler.postDelayed(new Runnable() {
                                                                                                                                                                                                                             @Override
                                                                                                                                                                                                                             public void run() {
-                                                                                                                                                                                                                                backgroundRain();
-                                                                                                                                                                                                                                handler.postDelayed(new Runnable() {
+                                                                                                                                                                                                                                tutorialText.setOnClickListener(new View.OnClickListener() {
                                                                                                                                                                                                                                     @Override
-                                                                                                                                                                                                                                    public void run() {
-                                                                                                                                                                                                                                        tutorialText.setOnClickListener(new View.OnClickListener() {
-                                                                                                                                                                                                                                            @Override
-                                                                                                                                                                                                                                            public void onClick(View v) {
-                                                                                                                                                                                                                                                startActivity(new Intent(getApplicationContext(), MainmenuActivity.class));
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                    public void onClick(View v) {
+                                                                                                                                                                                                                                        startActivity(new Intent(getApplicationContext(), MainmenuActivity.class));
                                                                                                                                                                                                                                     }
-                                                                                                                                                                                                                                }, 1500);
+                                                                                                                                                                                                                                });
                                                                                                                                                                                                                             }
-                                                                                                                                                                                                                        }, 500);
+                                                                                                                                                                                                                        }, 1500);
                                                                                                                                                                                                                     }
-                                                                                                                                                                                                                }, 1500);
+                                                                                                                                                                                                                }, 500);
                                                                                                                                                                                                             }
-                                                                                                                                                                                                        });
+                                                                                                                                                                                                        }, 1500);
                                                                                                                                                                                                     }
-                                                                                                                                                                                                }, 500);
+                                                                                                                                                                                                });
                                                                                                                                                                                             }
-                                                                                                                                                                                        });
-                                                                                                                                                                            }
-                                                                                                                                                                        }, 400);
+                                                                                                                                                                                        }, 500);
+                                                                                                                                                                                    }
+                                                                                                                                                                                });
                                                                                                                                                                     }
-                                                                                                                                                                }, 2500);
+                                                                                                                                                                }, 400);
                                                                                                                                                             }
-                                                                                                                                                        }, 1000);
+                                                                                                                                                        }, 2500);
                                                                                                                                                     }
-                                                                                                                                                });
-                                                                                                                                    }
-                                                                                                                                }, 1500);
+                                                                                                                                                }, 1000);
+                                                                                                                                            }
+                                                                                                                                        });
                                                                                                                             }
-                                                                                                                        }, 700);
+                                                                                                                        }, 1500);
                                                                                                                     }
-                                                                                                                }, 3000);
+                                                                                                                }, 700);
                                                                                                             }
-                                                                                                        }, 300);
+                                                                                                        }, 3000);
                                                                                                     }
                                                                                                 });
                                                                                             }
                                                                                         });
                                                                                     }
-                                                                                }, 500);
+                                                                                }, 300);
                                                                             }
                                                                         }, 700);
                                                                     }
@@ -272,11 +267,13 @@ public class TutorialActivity extends AppCompatActivity {
 
 
     private void textAnimationToScreen(View view) {
+        view.setVisibility(View.VISIBLE);
         view.animate().scaleXBy(1f).scaleYBy(1f).setDuration(500);
     }
 
     private void textAnimationFromScreen(View view) {
         view.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(500);
+        view.setVisibility(View.INVISIBLE);
     }
 
     private void newFall() {
