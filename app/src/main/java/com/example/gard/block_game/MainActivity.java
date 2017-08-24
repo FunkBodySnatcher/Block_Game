@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener onClickListener;
     private TextView countdown;
 
-    private int speed;
+    private int time;
     private int hp;
     private int score;
-    private Double chanceLimit;
+    private int nrBlocks;
     private Handler handler = new Handler();
 
 //    private int screenWidth;
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mainMenuText;
     private TextView tryAgainText;
 
-    private int nrBtns = 3;
     private boolean gameover = false;
 
     MediaPlayer blockBoop;
@@ -113,10 +112,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startGame(){
-        speed = 4800;
+        time = 4200;
         hp = 3;
         score = 0;
-        chanceLimit = 99.5;
 
         onClickListener = new View.OnClickListener() {
             @Override
@@ -154,27 +152,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 500);
 
-//                int chance = ran.nextInt(100)+1;
-//                if (nrBtns <= 5 && chance > chanceLimit) {
-//                    newFall();
-//                    nrBtns++;
-//                }
-
                 incScore();
-
-                if (score % 50 == 0) {
-                    newFall();
-                }
 
                 if (score % 10 == 0) {
                     if (score < 150) {
-                        speed-=120;
+                        time -=40;
                     } else if (score >= 100 && score < 150) {
-                        speed-=70;
-                    } else if (score >= 160 && speed >= 2000) {
-                        speed-=50;
+                        time -=30;
+                    } else if (score >= 160 && time >= 2000) {
+                        time -=20;
                     }
-                    chanceLimit-=0.8;
                 }
                 if ((ran.nextInt(100)+1) > 94 && hp < 3 && score >= 50) {
                     spawnHeartPower();
@@ -210,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 button.animate()
                         .translationY(screenHeight + screenHeight/5)
                         .rotationBy(1080)
-                        .setDuration(speed)
+                        .setDuration(time)
                         .withEndAction(new Runnable() {
                             @Override
                             public void run() {
@@ -230,6 +217,9 @@ public class MainActivity extends AppCompatActivity {
         if (!gameover) {
             score++;
             scoreTracker.setText(String.valueOf(score));
+            if (score == 20 || score == 50 || score == 100 || score == 160 || score == 250) {
+                newFall();
+            }
         }
     }
 
@@ -378,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
         heartPower.animate()
                 .translationY(screenHeight)
                 .rotationBy(1080)
-                .setDuration(speed-500)
+                .setDuration(time -500)
                 .withEndAction(new Runnable() {
                     @Override
                     public void run() {
