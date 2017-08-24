@@ -255,9 +255,14 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
 
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        }
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                }
+            }
+        }, 1000);
 
         handler.postDelayed(new Runnable() {
             @Override
