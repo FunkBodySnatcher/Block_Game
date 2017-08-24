@@ -34,11 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private int speed;
     private int hp;
     private int score;
-    private int highscore;
     private Double chanceLimit;
     private Handler handler = new Handler();
 
-    private int screenWidth;
+//    private int screenWidth;
     private int screenHeight;
 
     //Ending stuff
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
-        screenWidth = getResources().getDisplayMetrics().widthPixels;
+//        screenWidth = getResources().getDisplayMetrics().widthPixels;
 
         //Hide actionbar. May produce nullPointer....
         ActionBar actionBar = getSupportActionBar();
@@ -155,21 +154,25 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 500);
 
-                int chance = ran.nextInt(100)+1;
-                if (nrBtns <= 5 && chance > chanceLimit) {
-                    newFall();
-                    nrBtns++;
-                }
+//                int chance = ran.nextInt(100)+1;
+//                if (nrBtns <= 5 && chance > chanceLimit) {
+//                    newFall();
+//                    nrBtns++;
+//                }
 
                 incScore();
 
-                if (score % 20 == 0) {
-                    if (score < 100) {
-                        speed-=300;
+                if (score % 50 == 0) {
+                    newFall();
+                }
+
+                if (score % 10 == 0) {
+                    if (score < 150) {
+                        speed-=150;
                     } else if (score >= 100 && score < 150) {
-                        speed-=200;
-                    } else if (score >= 150 && speed > 1000) {
                         speed-=100;
+                    } else if (score >= 160 && speed >= 2000) {
+                        speed-=50;
                     }
                     chanceLimit-=0.8;
                 }
