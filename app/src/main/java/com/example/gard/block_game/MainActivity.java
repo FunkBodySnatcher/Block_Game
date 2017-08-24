@@ -168,9 +168,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (score % 10 == 0) {
                     if (score < 150) {
-                        speed-=150;
+                        speed-=120;
                     } else if (score >= 100 && score < 150) {
-                        speed-=100;
+                        speed-=70;
                     } else if (score >= 160 && speed >= 2000) {
                         speed-=50;
                     }
