@@ -1,6 +1,5 @@
 package com.example.gard.block_game;
 
-import android.animation.Animator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,17 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -143,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 }, 500);
 
                 int chance = ran.nextInt(100)+1;
-                if (nrBtns <= 6 && chance > chanceLimit) {
+                if (nrBtns <= 5 && chance > chanceLimit) {
                     newFall();
                     nrBtns++;
                 }
