@@ -243,7 +243,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                                                                     }
                                                                                                                 }, 3000);
                                                                                                             }
-                                                                                                        }, 100);
+                                                                                                        }, 300);
                                                                                                     }
                                                                                                 });
                                                                                             }

@@ -115,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final CustomButton button = (CustomButton) v;
 
+                //Play sound effect
+                playLightBoop();
+
                 button.setStroke(0, Color.BLACK);
 
                 //Disable button, preventing player from clicking button twice in a row.
@@ -125,9 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //Scale button
                 button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
-
-                //Play sound effect
-                playLightBoop();
 
                 //Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
                 newFall();
