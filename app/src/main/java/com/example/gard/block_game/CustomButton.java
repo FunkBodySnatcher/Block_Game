@@ -47,6 +47,7 @@ public class CustomButton extends AppCompatButton {
         setX(ran.nextInt(screenWidth-screenWidth/4));
         setRotation(ran.nextInt(90));
 
+
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             setTranslationZ(1);
         }

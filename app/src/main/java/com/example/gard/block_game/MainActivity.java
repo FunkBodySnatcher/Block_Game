@@ -121,9 +121,13 @@ public class MainActivity extends AppCompatActivity {
 
                 //Stop button where it's pressed.
                 button.animate().cancel();
+                if (android.os.Build.VERSION.SDK_INT >= 21) {
+                    button.setTranslationZ(1);
+                    button.bringToFront();
+                }
 
                 //Scale button
-                button.animate().scaleXBy(50).scaleYBy(50).setDuration(500);
+                button.animate().scaleXBy(20).scaleYBy(20).setDuration(300);
 
                 //Wait 0.5 seconds before removing button and setting background color to the color of the pressed button.
                 newFall();
@@ -151,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         speed-=300;
                     } else if (score >= 100 && score < 150) {
                         speed-=200;
-                    } else if (score >= 150 && speed > 999) {
+                    } else if (score >= 150 && speed > 1000) {
                         speed-=100;
                     }
                     chanceLimit-=0.8;
@@ -245,61 +249,70 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
 
-
-        tryAgainText.setOnClickListener(new View.OnClickListener() {
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
-                playLowBoop();
+            public void run() {
+                tryAgainText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        startActivity(getIntent());
+                        playLowBoop();
+                    }
+                });
+
+                mainMenuText.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
+
+                        playLowBoop();
+
+                        //Make score available for other activities.
+                        intent.putExtra("SCORE", score);
+
+                        startActivity(intent);
+
+                    }
+                });
             }
-        });
-
-        mainMenuText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
-
-                playLowBoop();
-
-                //Make score available for other activities.
-                intent.putExtra("SCORE", score);
-
-                startActivity(intent);
-
-            }
-        });
+        }, 1500);
     }
 
     private void countdown() {
-        countdown.setVisibility(View.VISIBLE);
-        playLowBoop();
-        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0).withEndAction(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                countdown.setVisibility(View.VISIBLE);
+                playLowBoop();
+                countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(0).withEndAction(new Runnable() {
                     @Override
                     public void run() {
-                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                        countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
                             @Override
                             public void run() {
-                                countdown.setText(String.valueOf(2));
-                                playLowBoop();
-                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
                                     @Override
                                     public void run() {
-                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                        countdown.setText(String.valueOf(2));
+                                        playLowBoop();
+                                        countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
                                             @Override
                                             public void run() {
-                                                countdown.setText(String.valueOf(1));
-                                                playLowBoop();
-                                                countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
+                                                countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                                        countdown.setText(String.valueOf(1));
+                                                        playLowBoop();
+                                                        countdown.animate().scaleXBy(1f).scaleYBy(1f).setDuration(400).withEndAction(new Runnable() {
                                                             @Override
                                                             public void run() {
-                                                                countdown.setVisibility(View.INVISIBLE);
+                                                                countdown.animate().scaleXBy(-1f).scaleYBy(-1f).setDuration(400).withEndAction(new Runnable() {
+                                                                    @Override
+                                                                    public void run() {
+                                                                        countdown.setVisibility(View.INVISIBLE);
+                                                                    }
+                                                                });
                                                             }
                                                         });
                                                     }
@@ -313,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        }, 500);
     }
 
     private void spawnHeartPower() {

@@ -37,6 +37,9 @@ public class HeartPower extends AppCompatImageView {
     public void setPos() {
         setY(-(screenWidth/5));
         setX(ran.nextInt(screenWidth - (screenWidth/5)));
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            setTranslationZ(1);
+        }
     }
 
     public void tutorialHeart(int x, int y) {
