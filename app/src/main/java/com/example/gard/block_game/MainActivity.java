@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer heartLoss;
     MediaPlayer heartPickUp;
 
+    private boolean isActivityIsVisible = true;
+
     //Variabel for reklame.
     private InterstitialAd mInterstitialAd;
 
@@ -258,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (mInterstitialAd.isLoaded()) {
+                if (mInterstitialAd.isLoaded() && isActivityIsVisible) {
                     mInterstitialAd.show();
                 }
             }
@@ -425,7 +427,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         blockBoop.stop();
         heartLoss.stop();
+       isActivityIsVisible = false;
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isActivityIsVisible = true;
+    }
 }
