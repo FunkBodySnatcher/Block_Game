@@ -91,7 +91,7 @@ public class TutorialActivity extends AppCompatActivity {
                                 .withEndAction(new Runnable() {
                                     @Override
                                     public void run() {
-                                        scoreText.setText("Hold up. This is a Block.");
+                                        scoreText.setText("Hold up. This is a Drizzle.");
                                         textAnimationToScreen(scoreText);
                                         handler.postDelayed(new Runnable() {
                                             @Override
@@ -119,7 +119,7 @@ public class TutorialActivity extends AppCompatActivity {
                                                                         handler.postDelayed(new Runnable() {
                                                                             @Override
                                                                             public void run() {
-                                                                                scoreText.setText("Tap the block to increase your score. Neat.");
+                                                                                scoreText.setText("Tap the Drizzle to increase your score. Neat.");
                                                                                 textAnimationToScreen(scoreText);
                                                                                 handler.postDelayed(new Runnable() {
                                                                                     @Override

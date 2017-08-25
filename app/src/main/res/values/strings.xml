@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Block_Game</string>
+    <string name="app_name">Drizzle Tap</string>
     <string name="aboutText">
         \n
 
-        <b>Insert name here</b> \n \n
+        <b>Drizzle tap</b> \n \n
 
         This game is an independent project made by two novice developers, and will most likely contain small bugs that will be patched in future updates.\n \n
         All fonts, visual effects, and sound effects used in this application are free-to-use products that are created to be used in a commercial context, and their respective creators will
