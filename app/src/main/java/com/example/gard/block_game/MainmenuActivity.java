@@ -71,7 +71,6 @@ public class MainmenuActivity extends AppCompatActivity {
 
         }
 
-
         screenHeight = getResources().getDisplayMetrics().heightPixels;
         screenWidth = getResources().getDisplayMetrics().widthPixels;
 

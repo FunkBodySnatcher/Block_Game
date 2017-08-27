@@ -1,17 +1,20 @@
 package com.example.gard.block_game;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -251,7 +254,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setEnding() {
-
         gameoverText.setVisibility(View.VISIBLE);
         gameoverText.setOnClickListener(null);
         mainMenuText.setVisibility(View.VISIBLE);
@@ -272,8 +274,13 @@ public class MainActivity extends AppCompatActivity {
                 tryAgainText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
-                        startActivity(getIntent());
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                        //finish();
+
+                        startActivity(intent);
+
                         playLowBoop();
                     }
                 });
@@ -281,11 +288,11 @@ public class MainActivity extends AppCompatActivity {
                 mainMenuText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         Intent intent = new Intent(getApplicationContext(), MainmenuActivity.class);
 
                         playLowBoop();
 
-                        //Make score available for other activities.
                         intent.putExtra("SCORE", score);
 
                         startActivity(intent);
