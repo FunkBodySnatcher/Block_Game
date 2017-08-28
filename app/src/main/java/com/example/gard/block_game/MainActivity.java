@@ -12,6 +12,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hideStatusBar();
         setContentView(R.layout.activity_main);
+
         cl = (ConstraintLayout) findViewById(R.id.constraintLayout);
         scoreTracker = (TextView) findViewById(R.id.scoreTrackerTextView);
         heart1 = (ImageView)findViewById(R.id.heart1);
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         //Test-id for reklame.
         MobileAds.initialize(this, "ca-app-pub-2366521515319341~6582167296");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-2366521515319341/8058900490");
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
@@ -103,17 +107,17 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        //Hide status bar.
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-
         countdown();
         handler.postDelayed(new Runnable() {
             public void run() {
                 startGame();
             }
         }, 2200);
+    }
+
+    private void hideStatusBar(){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     private void startGame(){
