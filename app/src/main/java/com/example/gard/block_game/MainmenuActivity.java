@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +39,8 @@ public class MainmenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         hideStatusBar();
         setContentView(R.layout.activity_mainmenu);
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         //Get custom font from assets.
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");

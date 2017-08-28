@@ -3,6 +3,7 @@ package com.example.gard.block_game;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -40,6 +41,8 @@ public class TutorialActivity extends AppCompatActivity {
         hideStatusBar();
         setContentView(R.layout.activity_tutorial);
         final Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/sometimelater.otf");
+
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         cl = (ConstraintLayout) findViewById(R.id.constraintLayoutTutorial);
         clSet = new ConstraintSet();
@@ -331,3 +334,4 @@ public class TutorialActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 }
+
