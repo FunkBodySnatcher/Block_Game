@@ -316,11 +316,8 @@ public class TutorialActivity extends AppCompatActivity {
         AlertDialog.Builder alertMessage = new AlertDialog.Builder(TutorialActivity.this);
         alertMessage.setTitle("Animations");
         alertMessage.setMessage(" Hi there! Our game heavily relies on animations, and in order for it to work, you need to have your animations turned on!"+
-                " If you go into Settings -> Developer settings, scroll down to settings for animations"+
-                " (There are three individual settings) and select animation scale x1 for each of them."+
-                " If you do not have the option to select developers options, you are all set!"+
-                " Pro tip: If you, for any reason, want to enabled developer settings, you can go into 'About this phone' and then press the 'Build number'"+
-                " seven times to enabled this feature.");
+                "These settings can be located in 'Settings' -> 'Developer settings'. Make sure your animation scaling is set to 1x."+
+        "If you do not have the option to select 'Developer options', you are all set!");
         alertMessage.setPositiveButton("GOT IT!", null);
         alertMessage.show();
 
