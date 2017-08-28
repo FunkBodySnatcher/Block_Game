@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         //Test-id for reklame.
         MobileAds.initialize(this, "ca-app-pub-2366521515319341~6582167296");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-2366521515319341/8058900490");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         blockBoop = MediaPlayer.create(getApplicationContext(), R.raw.bvop);
