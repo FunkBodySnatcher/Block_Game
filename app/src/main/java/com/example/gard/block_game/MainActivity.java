@@ -1,5 +1,6 @@
 package com.example.gard.block_game;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private int time;
     private int hp;
     private int score;
+    private int highscore;
+    private boolean lightTheBeacons = false;
     private int nrBlocks;
     private Handler handler = new Handler();
 
@@ -266,6 +269,19 @@ public class MainActivity extends AppCompatActivity {
         mainMenuText.setVisibility(View.VISIBLE);
         tryAgainText.setVisibility(View.VISIBLE);
 
+        //Use sharedPreferences to save current highscore.
+        SharedPreferences settings = getSharedPreferences("HIGHSCORE", Context.MODE_PRIVATE);
+        highscore = settings.getInt("HIGHSCORE", 0);
+
+        //Compare score to highscore in order to determine if there's been a new highscore.
+        if (score > highscore){
+            highscore = score;
+            //If there has, apply new highscore.
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt("HIGHSCORE", score);
+            editor.apply();
+        }
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -300,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
                         playLowBoop();
 
-                        intent.putExtra("SCORE", score);
+                        intent.putExtra("SCORE", highscore);
 
                         startActivity(intent);
 
