@@ -300,11 +300,11 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-                        //finish();
-
                         startActivity(intent);
 
                         playLowBoop();
+
+                        finish();
                     }
                 });
 
@@ -319,6 +319,8 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("SCORE", highscore);
 
                         startActivity(intent);
+
+                        finish();
 
                     }
                 });

@@ -75,6 +75,8 @@ public class MainmenuActivity extends AppCompatActivity {
 
             firstRun.edit().putBoolean("firstRun", false).apply();
 
+            finish();
+
         }
 
         screenHeight = getResources().getDisplayMetrics().heightPixels;
@@ -120,6 +122,7 @@ public class MainmenuActivity extends AppCompatActivity {
                 playLowBoop();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -129,6 +132,7 @@ public class MainmenuActivity extends AppCompatActivity {
                 playLowBoop();
                 Intent intent = new Intent(v.getContext(), TutorialActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
